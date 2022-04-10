@@ -1,3 +1,4 @@
+// import 'react-native-gesture-handler';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -10,15 +11,18 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
+  // SafeAreaView,
+  // View,
+  // Text,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
 } from 'react-native';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store from '../state/store';
+import {NavigationContainer} from '@react-navigation/native';
+import {MainNavigator} from './Navigation';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -26,13 +30,13 @@ const App = () => {
   console.log(styles);
 
   return (
-    <SafeAreaView>
+    <SafeAreaProvider>
       <Provider store={store}>
-        <View>
-          <Text>News App</Text>
-        </View>
+        <NavigationContainer>
+          <MainNavigator />
+        </NavigationContainer>
       </Provider>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
