@@ -1,21 +1,21 @@
-import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
+import {all, call, fork, put, select, takeLatest} from 'redux-saga/effects';
 
 import {getNewsFail, getNewsPending, getNewsSuccess} from '../../actions';
 import {GET_NEWS} from '../../actions/news/action.types';
+import {selectNewsQuery} from '../../selectors';
 import {getNewsAPI} from '../../services';
-import {GetNewsRequestSuccessResponse} from '../../types';
+import {GetNewsRequestSuccessResponse, NewsQuery} from '../../types';
 
 export function* getNews() {
   try {
     yield put(getNewsPending());
-    const data: GetNewsRequestSuccessResponse = yield call(getNewsAPI);
+    const newsQuery: NewsQuery = yield select(selectNewsQuery);
+    const data: GetNewsRequestSuccessResponse = yield call(
+      getNewsAPI,
+      newsQuery,
+    );
     // console.log('data', data);
-    // if (response) {
     yield put(getNewsSuccess(data));
-    // } else {
-    //   console.log(error, 'error error');
-    //   yield put(getNewsFail(error));
-    // }
   } catch (error: any) {
     console.log(error, 'error error');
     yield put(getNewsFail(error));

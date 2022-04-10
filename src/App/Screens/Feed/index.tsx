@@ -7,21 +7,24 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getNews} from '../../../state/actions';
-import {selectNewsState} from '../../../state/selectors';
+import {
+  getNews,
+  updateNewsQueryPage,
+  // updateNewsQueryTo,
+} from '../../../state/actions';
+import {selectNewsQuery, selectNewsState} from '../../../state/selectors';
 import {useNavigation} from '@react-navigation/native';
 import {renderItem} from './Components';
-
-// type Props = {};
 
 export const FeedScreen = () => {
   const dispatch = useDispatch();
   const {articles, loading, errMsg} = useSelector(selectNewsState);
+  const query = useSelector(selectNewsQuery);
   const navigation = useNavigation();
-
+  // console.log('{articles, loading, errMsg}', {articles, loading, errMsg});
   useEffect(() => {
     dispatch(getNews());
-  }, [dispatch]);
+  }, [dispatch, query]);
 
   const onItemPress = () => {
     navigation.navigate('ArticleDetails' as never);
@@ -29,10 +32,16 @@ export const FeedScreen = () => {
 
   return (
     <View style={styles.feedContainer}>
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
+      {articles.length === 0 && loading && (
+        <ActivityIndicator size="large" color="#0000ff" />
+      )}
       {errMsg !== '' && <Text>{errMsg}</Text>}
-      {articles.length > 0 && (
+      {articles && articles.length > 0 && (
         <FlatList
+          refreshing={loading}
+          onRefresh={() => {
+            dispatch(updateNewsQueryPage(query.page + 1));
+          }}
           contentContainerStyle={styles.flatList}
           data={articles}
           renderItem={({item}) => {
@@ -50,7 +59,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingRight: 5,
     paddingLeft: 15,
-    // backgroundColor: '#fff',
   },
   flatList: {
     paddingRight: 10,

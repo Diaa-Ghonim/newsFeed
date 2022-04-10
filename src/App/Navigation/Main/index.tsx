@@ -5,7 +5,13 @@ const MainStackNavigator = createNativeStackNavigator();
 
 export const MainNavigator = () => {
   return (
-    <MainStackNavigator.Navigator initialRouteName="Feed">
+    <MainStackNavigator.Navigator
+      initialRouteName="Feed"
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerTitleAlign: 'center',
+        headerStyle: {backgroundColor: '#222'},
+      }}>
       <MainStackNavigator.Screen name="Feed" component={FeedScreen} />
       <MainStackNavigator.Screen
         name="ArticleDetails"

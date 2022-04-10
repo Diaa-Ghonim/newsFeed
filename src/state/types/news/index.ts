@@ -22,10 +22,20 @@ export interface NewsResponse {
   articles: [Article];
 }
 
+export interface NewsQuery {
+  page: number;
+  pageSize: number;
+  q: string;
+  from: string;
+  to: string;
+  sortedBy: string;
+  apiKey: string;
+}
 export interface NewsState {
   loading: boolean;
   articles: Article[];
   errMsg: string;
+  query: NewsQuery;
 }
 
 export type GetNewsRequestSuccessResponse = NewsResponse;
@@ -51,3 +61,43 @@ export type GetNewsFail = (error: ApiRequestErrorResponse) => {
   type: string;
   payload: {error: ApiRequestErrorResponse};
 };
+
+export type UpdateNewsQueryPage = (page: number) => {
+  type: string;
+  payload: {page: number};
+};
+
+export type UpdateNewsQueryPageSize = (pageSize: number) => {
+  type: string;
+  payload: {pageSize: number};
+};
+
+export type UpdateNewsQueryQ = (to: string) => {
+  type: string;
+  payload: {to: string};
+};
+
+export type UpdateNewsQueryFrom = (from: string) => {
+  type: string;
+  payload: {from: string};
+};
+
+export type UpdateNewsQueryTo = (to: string) => {
+  type: string;
+  payload: {to: string};
+};
+
+export type UpdateNewsQuerySortedBy = (sortedBy: string) => {
+  type: string;
+  payload: {sortedBy: string};
+};
+
+// export type NewsActionTypes =
+//   | GetNews
+//   | GetNewsSuccess
+//   | GetNewsPending
+//   | GetNewsFail
+//   | UpdateNewsQueryQ
+//   | UpdateNewsQueryFrom
+//   | UpdateNewsQueryTo
+//   | UpdateNewsQuerySortedBy;
