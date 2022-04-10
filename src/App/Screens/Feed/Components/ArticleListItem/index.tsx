@@ -15,7 +15,6 @@ interface Props {
 }
 
 export const renderItem = ({item, onItemPress = () => {}}: Props) => {
-  console.log('item', item);
   return (
     <TouchableWithoutFeedback onPress={onItemPress}>
       <View style={styles.articleContainer} key={item.author}>
@@ -36,9 +35,11 @@ export const renderItem = ({item, onItemPress = () => {}}: Props) => {
 const styles = StyleSheet.create({
   articleContainer: {
     shadowColor: '#000',
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.1,
     shadowRadius: 2,
     backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ddd',
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,

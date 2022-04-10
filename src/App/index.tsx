@@ -10,7 +10,7 @@
  */
 
 import React from 'react';
-import {StyleSheet, useColorScheme} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store from '../state/store';
@@ -27,6 +27,7 @@ const App = () => {
     <SafeAreaProvider>
       <Provider store={store}>
         <NavigationContainer>
+          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
           <MainNavigator />
         </NavigationContainer>
       </Provider>

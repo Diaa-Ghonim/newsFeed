@@ -15,7 +15,7 @@ export const getNewsHandler = {
     {response}: {response: GetNewsRequestSuccessResponse},
   ) => {
     draftState.loading = false;
-    draftState.articles = response.articles;
+    draftState.articles = [...response.articles, ...draftState.articles];
   },
 
   [GET_NEWS.ERROR]: (
