@@ -9,7 +9,7 @@ export function* getNews() {
   try {
     yield put(getNewsPending());
     const data: GetNewsRequestSuccessResponse = yield call(getNewsAPI);
-    console.log('data', data);
+    // console.log('data', data);
     // if (response) {
     yield put(getNewsSuccess(data));
     // } else {
