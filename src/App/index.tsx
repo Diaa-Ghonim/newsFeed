@@ -10,13 +10,7 @@
  */
 
 import React from 'react';
-import {
-  // SafeAreaView,
-  // View,
-  // Text,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store from '../state/store';
