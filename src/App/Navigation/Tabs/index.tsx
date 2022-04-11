@@ -14,12 +14,17 @@ export function Tabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerTintColor: '#fff',
+        // headerTintColor: '#fff',
         headerTitleAlign: 'center',
-        headerStyle: {backgroundColor: '#222'},
+        headerStyle: {
+          backgroundColor: '#c2bebe',
+          borderBottomWidth: 1,
+          borderBottomColor: '#c2bebe',
+        },
         tabBarStyle: {
           borderTopWidth: 1,
           borderTopColor: '#ddd',
+          backgroundColor: '#c2bebe',
           paddingBottom: Platform.OS === 'android' ? 10 : 30,
           paddingTop: 5,
           height: Platform.OS === 'ios' ? 90 : 70,
@@ -31,7 +36,7 @@ export function Tabs() {
         options={{
           //   headerShown: false,
           tabBarIcon: ({focused}) => (
-            <Icon name="home" size={30} color={focused ? '#1e90ff' : ''} />
+            <Icon name="home" size={30} color={focused ? '#1e90ff' : '#000'} />
           ),
         }}
       />
@@ -40,7 +45,11 @@ export function Tabs() {
         component={SettingScreen}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="setting" size={30} color={focused ? '#1e90ff' : ''} />
+            <Icon
+              name="setting"
+              size={30}
+              color={focused ? '#1e90ff' : '#000'}
+            />
           ),
         }}
       />

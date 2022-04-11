@@ -27,7 +27,10 @@ const App = () => {
     <SafeAreaProvider>
       <Provider store={store}>
         <NavigationContainer>
-          <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor="#6a51ae"
+          />
           <MainNavigator />
         </NavigationContainer>
       </Provider>
