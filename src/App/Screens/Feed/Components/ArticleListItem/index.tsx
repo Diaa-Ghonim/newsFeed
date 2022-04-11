@@ -45,17 +45,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   title: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
     marginBottom: 5,
     color: '#000',
   },
   author: {
     color: 'purple',
     margin: 5,
+    fontFamily: 'OpenSans-Regular',
   },
   publishedAt: {
     color: 'purple',
     margin: 5,
+    fontFamily: 'OpenSans-Regular',
   },
   image: {
     width: '100%',
