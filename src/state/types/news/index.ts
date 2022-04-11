@@ -3,11 +3,12 @@ import {ApiRequestErrorResponse} from '../common';
 export interface ArticleFromResponse {}
 
 export interface Article {
+  id?: string;
   source: {
-    id: string;
+    id: string | null;
     name: string;
   };
-  author: string;
+  author: string | null;
   title: string;
   description: string;
   url: string;
@@ -19,7 +20,7 @@ export interface Article {
 export interface NewsResponse {
   status: string;
   totalResults: number;
-  articles: [Article];
+  articles: Article[];
 }
 
 export interface NewsQuery {

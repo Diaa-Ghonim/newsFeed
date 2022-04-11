@@ -7,27 +7,28 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getNews,
-  updateNewsQueryPage,
-  // updateNewsQueryTo,
-} from '../../../state/actions';
+import {getNews, updateNewsQueryPage} from '../../../state/actions';
 import {selectNewsQuery, selectNewsState} from '../../../state/selectors';
 import {useNavigation} from '@react-navigation/native';
 import {renderItem} from './Components';
+import {Article} from '../../../state/types';
+import {RootStackParamList} from '../../Navigation';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export const FeedScreen = () => {
   const dispatch = useDispatch();
   const {articles, loading, errMsg} = useSelector(selectNewsState);
   const query = useSelector(selectNewsQuery);
-  const navigation = useNavigation();
-  // console.log('{articles, loading, errMsg}', {articles, loading, errMsg});
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch, query]);
 
-  const onItemPress = () => {
-    navigation.navigate('ArticleDetails' as never);
+  const onItemPress = (item: Article) => {
+    navigation.navigate('ArticleDetails', {
+      articleId: item.id,
+    });
   };
 
   return (

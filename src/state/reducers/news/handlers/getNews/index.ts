@@ -1,3 +1,5 @@
+import 'react-native-get-random-values';
+import {v4 as uuidv4} from 'uuid';
 import {GET_NEWS} from '../../../../actions/news/action.types';
 import {
   ApiRequestErrorResponse,
@@ -15,6 +17,9 @@ export const getNewsHandler = {
     {response}: {response: GetNewsRequestSuccessResponse},
   ) => {
     draftState.loading = false;
+    response.articles = response.articles.map(article => {
+      return {...article, id: uuidv4()};
+    });
     draftState.articles = [...response.articles, ...draftState.articles];
   },
 
