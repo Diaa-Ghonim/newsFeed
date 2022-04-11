@@ -4,16 +4,16 @@ import {ArticleDetailsScreen} from '../../Screens';
 import {Tabs} from '../Tabs';
 
 export type RootStackParamList = {
-  Feed: undefined;
+  Home: undefined;
   ArticleDetails: {articleId: string | undefined};
 };
 const MainStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
 export const MainNavigator = () => {
   return (
-    <MainStackNavigator.Navigator initialRouteName="Feed">
+    <MainStackNavigator.Navigator initialRouteName="Home">
       <MainStackNavigator.Screen
-        name="Feed"
+        name="Home"
         component={Tabs}
         options={{headerShown: false}}
       />
