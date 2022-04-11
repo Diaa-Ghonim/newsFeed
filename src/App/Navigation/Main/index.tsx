@@ -1,7 +1,12 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {FeedScreen, ArticleDetails} from '../../Screens';
-const MainStackNavigator = createNativeStackNavigator();
+
+export type RootStackParamList = {
+  Feed: undefined;
+  ArticleDetails: {articleId: string | undefined};
+};
+const MainStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
 export const MainNavigator = () => {
   return (

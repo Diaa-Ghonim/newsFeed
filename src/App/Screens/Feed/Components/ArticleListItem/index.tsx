@@ -8,22 +8,21 @@ import {
 } from 'react-native';
 import {Article} from '../../../../../state/types';
 import {Line} from '../../../../Components';
-
 interface Props {
   item: Article;
-  onItemPress: () => void;
+  onItemPress: (item: Article) => void;
 }
 
 export const renderItem = ({item, onItemPress = () => {}}: Props) => {
   return (
-    <TouchableWithoutFeedback onPress={onItemPress}>
+    <TouchableWithoutFeedback onPress={() => onItemPress(item)}>
       <View style={styles.articleContainer} key={item.author}>
         <Text style={styles.title}>{item.title}</Text>
 
-        <Line width="90%" height={1} color="#ddd" />
+        <Line width="90%" height={1} color="#c2bebe" />
         <Text style={styles.publishedAt}>publishedAt: {item.publishedAt}</Text>
 
-        <Line width="75%" height={1} color="#ddd" />
+        <Line width="75%" height={1} color="#c2bebe" />
         <Text style={styles.author}>auther: {item.author}</Text>
 
         <Image source={{uri: item.urlToImage}} style={styles.image} />
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     marginBottom: 5,
+    color: '#000',
   },
   author: {
     color: 'purple',
@@ -62,5 +62,6 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 10,
     borderRadius: 5,
+    // resizeMode: 'cover',
   },
 });
