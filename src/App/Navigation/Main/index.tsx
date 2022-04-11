@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ArticleDetailsScreen} from '../../Screens';
 import {Tabs} from '../Tabs';
+import {useColorScheme} from 'react-native';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -10,6 +11,7 @@ export type RootStackParamList = {
 const MainStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
 export const MainNavigator = () => {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <MainStackNavigator.Navigator initialRouteName="Home">
       <MainStackNavigator.Screen
@@ -21,9 +23,11 @@ export const MainNavigator = () => {
         name="ArticleDetails"
         component={ArticleDetailsScreen}
         options={{
-          headerTintColor: '#fff',
+          headerTintColor: isDarkMode ? '#fff' : '#000',
           headerTitleAlign: 'center',
-          headerStyle: {backgroundColor: '#222'},
+          headerStyle: {
+            backgroundColor: isDarkMode ? '#000' : '#c2bebe',
+          },
           title: 'Article Details',
         }}
       />

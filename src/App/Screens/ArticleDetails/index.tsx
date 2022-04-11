@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  useColorScheme,
   View,
 } from 'react-native';
 import React from 'react';
@@ -16,23 +17,71 @@ import {Line} from '../../Components';
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetails'>;
 
 export const ArticleDetailsScreen = ({route}: Props) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
   const {articles} = useSelector(selectNewsState);
   const article = articles.find(art => art.id === route?.params?.articleId);
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.wrapper}>
-          <View style={styles.container}>
-            <Text style={styles.title}>{article?.title}</Text>
-            <Line width="90%" color="#c2bebe" height={1} />
+    <SafeAreaView
+      style={{backgroundColor: isDarkMode ? '#000' : 'transparent'}}>
+      <ScrollView
+        style={{
+          backgroundColor: isDarkMode ? '#000' : 'transparent',
+        }}>
+        <View
+          style={{
+            ...styles.wrapper,
+            backgroundColor: isDarkMode ? '#000' : 'transparent',
+          }}>
+          <View
+            style={{
+              ...styles.container,
+              backgroundColor: isDarkMode ? '#212121' : '#fff',
+              borderColor: isDarkMode ? '#000' : '#ddd',
+            }}>
+            <Text
+              style={{
+                ...styles.title,
+                color: isDarkMode ? '#fff' : '#111',
+              }}>
+              {article?.title}
+            </Text>
+            <Line
+              width="90%"
+              color={isDarkMode ? 'white' : '#c2bebe'}
+              height={1}
+            />
 
-            <Text style={styles.publishedAt}>At: {article?.publishedAt}</Text>
-            <Line width="70%" color="#c2bebe" height={1} />
+            <Text
+              style={{
+                ...styles.publishedAt,
+                color: isDarkMode ? '#fff' : 'purple',
+              }}>
+              At: {article?.publishedAt}
+            </Text>
+            <Line
+              width="70%"
+              color={isDarkMode ? 'white' : '#c2bebe'}
+              height={1}
+            />
 
-            <Text style={styles.author}>By: {article?.author}</Text>
-            <Line width="50%" color="#c2bebe" height={1} />
+            <Text
+              style={{
+                ...styles.author,
+                color: isDarkMode ? '#fff' : 'purple',
+              }}>
+              By: {article?.author}
+            </Text>
+            <Line
+              width="50%"
+              color={isDarkMode ? 'white' : '#c2bebe'}
+              height={1}
+            />
 
-            <Text style={styles.content}>{article?.content}</Text>
+            <Text
+              style={{...styles.content, color: isDarkMode ? '#fff' : '#000'}}>
+              {article?.content}
+            </Text>
             <Image source={{uri: article?.urlToImage}} style={styles.image} />
           </View>
         </View>
@@ -43,10 +92,9 @@ export const ArticleDetailsScreen = ({route}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderRadius: 10,
   },
   wrapper: {
     padding: 10,
@@ -57,13 +105,13 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   author: {
-    color: 'purple',
+    // color: 'purple',
     marginVertical: 5,
     fontSize: 15,
     fontFamily: 'OpenSans-Regular',
   },
   publishedAt: {
-    color: 'purple',
+    // color: 'purple',
     marginVertical: 5,
     fontSize: 15,
     fontFamily: 'OpenSans-Regular',
@@ -72,7 +120,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
-    color: '#000',
+    // color: '#000',
   },
   image: {
     width: '100%',

@@ -4,6 +4,8 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  useColorScheme,
+  // RefreshControl,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -22,6 +24,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {CustomInput as SearchInput} from '../../Components';
 
 export const FeedScreen = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
@@ -44,7 +48,7 @@ export const FeedScreen = () => {
         return (
           <Icon
             name="search"
-            color="black"
+            color={isDarkMode ? '#fff' : '#000'}
             size={15}
             style={styles.searchIcon}
             onPress={() => {
@@ -57,13 +61,17 @@ export const FeedScreen = () => {
         );
       },
     });
-  }, [navigation, isSearchBar]);
+  }, [navigation, isSearchBar, isDarkMode]);
 
   useEffect(() => {
     dispatch(updateNewsQueryQ(searchValue));
   }, [dispatch, searchValue]);
   return (
-    <View style={styles.feedContainer}>
+    <View
+      style={{
+        ...styles.feedContainer,
+        backgroundColor: isDarkMode ? '#000' : 'transparent',
+      }}>
       {articles.length === 0 && loading && (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
@@ -72,10 +80,7 @@ export const FeedScreen = () => {
         <SearchInput
           inputProps={{
             placeholder: 'Search',
-            onChangeText: value => {
-              setSearchValue(value);
-              console.log('value', value);
-            },
+            onChangeText: value => setSearchValue(value),
             value: searchValue,
           }}
         />
@@ -83,7 +88,13 @@ export const FeedScreen = () => {
 
       {articles.length === 0 && !loading && (
         <View style={styles.noDataContainer}>
-          <Text style={styles.noDataText}>No Data</Text>
+          <Text
+            style={{
+              ...styles.noDataText,
+              color: isDarkMode ? '#fff' : '#000',
+            }}>
+            No Data
+          </Text>
         </View>
       )}
       {articles && articles.length > 0 && (
@@ -93,10 +104,20 @@ export const FeedScreen = () => {
             onRefresh={() => {
               dispatch(updateNewsQueryPage(query.page + 1));
             }}
+            // refreshControl={
+            //   <RefreshControl
+            //     refreshing={loading}
+            //     onRefresh={() => {
+            //       dispatch(updateNewsQueryPage(query.page + 1));
+            //     }}
+            //     // tintColor={isDarkMode ? '#fff' : '#000'}
+            //     // titleColor={isDarkMode ? '#fff' : '#000'}
+            //   />
+            // }
             contentContainerStyle={styles.flatList}
             data={articles}
             renderItem={({item}) => {
-              return renderItem({item, onItemPress});
+              return renderItem({item, onItemPress, isDarkMode});
             }}
           />
         </>
@@ -125,6 +146,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontFamily: 'OpenSans-Bold',
-    color: '#000',
+    // color: '#000',
   },
 });
