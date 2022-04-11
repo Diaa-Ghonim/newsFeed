@@ -15,7 +15,7 @@ import {Line} from '../../Components';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetails'>;
 
-export const ArticleDetails = ({route}: Props) => {
+export const ArticleDetailsScreen = ({route}: Props) => {
   const {articles} = useSelector(selectNewsState);
   const article = articles.find(art => art.id === route?.params?.articleId);
   return (
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    fontWeight: 'bold',
     marginBottom: 5,
     fontFamily: 'OpenSans-Bold',
     color: '#000',
