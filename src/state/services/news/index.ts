@@ -17,7 +17,16 @@ export const getNewsAPI = (
   let urlQuery = `?page=${page}&pageSize=${pageSize}&q=${q}&from=${from}&to${to}&sortBy=${sortedBy}&apiKey=${apiKey}`;
   console.log('NEWS_API', NEWS_API + urlQuery);
   return new Promise(resolve => {
-    resolve(data);
+    if (q) {
+      console.log('q', q);
+      const filterdData = data.articles.filter(item =>
+        item.title.toLowerCase().includes(q.toLowerCase()),
+      );
+      console.log('filterdData', filterdData.length);
+      resolve({...data, articles: filterdData});
+    } else {
+      resolve(data);
+    }
     // fetch(NEWS_API + urlQuery)
     //   .then(response => response.json())
     //   .then(response => {

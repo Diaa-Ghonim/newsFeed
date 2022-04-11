@@ -20,7 +20,11 @@ export const getNewsHandler = {
     response.articles = response.articles.map(article => {
       return {...article, id: uuidv4()};
     });
-    draftState.articles = [...response.articles, ...draftState.articles];
+    if (draftState.query.q) {
+      draftState.articles = response.articles;
+    } else {
+      draftState.articles = [...response.articles, ...draftState.articles];
+    }
   },
 
   [GET_NEWS.ERROR]: (
