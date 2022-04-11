@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-// import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../Navigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useSelector} from 'react-redux';
@@ -17,7 +16,6 @@ import {Line} from '../../Components';
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetails'>;
 
 export const ArticleDetails = ({route}: Props) => {
-  // const navigation = useNavigation();
   const {articles} = useSelector(selectNewsState);
   const article = articles.find(art => art.id === route?.params?.articleId);
   return (
@@ -56,20 +54,26 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     marginBottom: 5,
+    fontFamily: 'OpenSans-Bold',
+    color: '#000',
   },
   author: {
     color: 'purple',
     marginVertical: 5,
     fontSize: 15,
+    fontFamily: 'OpenSans-Regular',
   },
   publishedAt: {
     color: 'purple',
     marginVertical: 5,
     fontSize: 15,
+    fontFamily: 'OpenSans-Regular',
   },
   content: {
     marginVertical: 10,
     fontSize: 16,
+    fontFamily: 'OpenSans-Regular',
+    color: '#000',
   },
   image: {
     width: '100%',
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     marginTop: 20,
-    // resizeMode: 'stretch',
   },
 });
+
+// abstract regular text component with its style and can take custom style also
