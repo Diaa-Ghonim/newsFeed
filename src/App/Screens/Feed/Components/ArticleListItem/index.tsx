@@ -1,14 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  Image,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  StyleSheet,
-} from 'react-native';
+import {Image, TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import {Article} from '../../../../../state/types';
-import {Line} from '../../../../Components';
+import {AppText, Line} from '../../../../Components';
+import {Colors} from '../../../../../constants/Colors';
+
 interface Props {
   item: Article;
   onItemPress: (item: Article) => void;
@@ -20,7 +16,9 @@ export const renderItem = ({
   onItemPress = () => {},
   isDarkMode,
 }: Props) => {
-  console.log(item.id);
+  const lineColor = isDarkMode ? Colors.lightLine : Colors.darkLine;
+  const metaDataColor = isDarkMode ? Colors.light : Colors.purple;
+  const titleColor = isDarkMode ? Colors.light : Colors.dark;
   return (
     <TouchableWithoutFeedback onPress={() => onItemPress(item)}>
       <View
@@ -30,32 +28,20 @@ export const renderItem = ({
           borderColor: isDarkMode ? '#000' : '#ddd',
         }}
         key={item.author}>
-        <Text
-          style={{
-            ...styles.title,
-            color: isDarkMode ? '#fff' : '#111',
-          }}>
+        <AppText.BoldText style={{color: titleColor}}>
           {item.title}
-        </Text>
+        </AppText.BoldText>
+        <Line width="90%" height={1} color={lineColor} />
 
-        <Line width="90%" height={1} color={isDarkMode ? '#fff' : '#c2bebe'} />
-        <Text
-          style={{
-            ...styles.publishedAt,
-            color: isDarkMode ? '#fff' : 'purple',
-          }}>
-          publishedAt: {item.publishedAt}
-        </Text>
+        <AppText.RegularText style={{color: metaDataColor}}>
+          {item.publishedAt}
+        </AppText.RegularText>
 
-        <Line width="75%" height={1} color={isDarkMode ? '#fff' : '#c2bebe'} />
-        <Text
-          style={{
-            ...styles.author,
-            color: isDarkMode ? '#fff' : 'purple',
-          }}>
-          auther: {item.author}
-        </Text>
+        <Line width="75%" height={1} color={lineColor} />
 
+        <AppText.RegularText style={{color: metaDataColor}}>
+          {item.author}
+        </AppText.RegularText>
         <Image source={{uri: item.urlToImage}} style={styles.image} />
       </View>
     </TouchableWithoutFeedback>
@@ -67,34 +53,16 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 2,
-    // backgroundColor: '#fff',
     borderWidth: 1,
     padding: 10,
     borderRadius: 4,
     marginBottom: 10,
     marginTop: 10,
   },
-  title: {
-    // fontWeight: 'bold',
-    fontFamily: 'OpenSans-Bold',
-    marginBottom: 5,
-    // color: '#000',
-  },
-  author: {
-    // color: 'purple',
-    margin: 5,
-    fontFamily: 'OpenSans-Regular',
-  },
-  publishedAt: {
-    // color: 'purple',
-    margin: 5,
-    fontFamily: 'OpenSans-Regular',
-  },
   image: {
     width: '100%',
     height: 150,
     marginVertical: 10,
     borderRadius: 5,
-    // resizeMode: 'cover',
   },
 });
