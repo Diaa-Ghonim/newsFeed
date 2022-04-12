@@ -83,8 +83,6 @@ export const FeedScreen = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       )}
 
-      {errMsg !== '' && <ErrorMessage message={errMsg} />}
-
       {isSearchBar && (
         <SearchInput
           inputProps={{
@@ -96,7 +94,11 @@ export const FeedScreen = () => {
         />
       )}
 
-      {articles.length === 0 && !loading && <NoData />}
+      {errMsg !== '' && (
+        <ErrorMessage message={errMsg} messageContainerStyle={{flex: 1}} />
+      )}
+
+      {articles.length === 0 && !errMsg && !loading && <NoData />}
 
       {articles && articles.length > 0 && (
         <>
