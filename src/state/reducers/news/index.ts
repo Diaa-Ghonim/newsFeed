@@ -2,7 +2,7 @@ import {createReducer} from '../../../utils/createReducer';
 import {NewsState} from '../../types';
 import {newsHandler} from './handlers';
 
-export const booksInitialState: NewsState = {
+export const newsInitialState: NewsState = {
   loading: false,
   articles: [],
   errMsg: '',
@@ -17,4 +17,4 @@ export const booksInitialState: NewsState = {
   },
 };
 
-export const booksReducer = createReducer(booksInitialState, newsHandler);
+export const newsReducer = createReducer(newsInitialState, newsHandler);
