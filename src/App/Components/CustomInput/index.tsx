@@ -10,6 +10,7 @@ import {
   Keyboard,
 } from 'react-native';
 import React from 'react';
+import {Colors} from '../../../constants/Colors';
 
 type Props = {
   containerStyle?: ViewStyle;
@@ -39,11 +40,11 @@ export const CustomInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: 'purple',
-    shadowColor: '#purple',
+    borderColor: Colors.purple,
+    shadowColor: Colors.purple,
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 10,
@@ -53,6 +54,6 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '100%',
     height: 40,
-    color: '#000',
+    color: Colors.dark,
   },
 });

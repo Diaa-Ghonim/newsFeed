@@ -131,11 +131,11 @@ const styles = StyleSheet.create({
   feedContainer: {
     flex: 1,
     paddingVertical: 10,
-    paddingRight: 5,
-    paddingLeft: 15,
+    // paddingRight: 5,
+    paddingLeft: 5,
   },
   flatList: {
-    paddingRight: 10,
+    paddingRight: 5,
   },
   searchIcon: {marginRight: 30},
 });
