@@ -22,10 +22,11 @@ import {RootStackParamList} from '../../Navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {CustomInput as SearchInput} from '../../Components';
+import {useTranslation} from 'react-i18next';
 
 export const FeedScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  const {t} = useTranslation();
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
@@ -79,7 +80,8 @@ export const FeedScreen = () => {
       {isSearchBar && (
         <SearchInput
           inputProps={{
-            placeholder: 'Search',
+            placeholder: t('Search'),
+            placeholderTextColor: '#111',
             onChangeText: value => setSearchValue(value),
             value: searchValue,
           }}
