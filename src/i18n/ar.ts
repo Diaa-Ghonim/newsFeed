@@ -9,6 +9,6 @@ export const ar = {
     Language: 'اللغة',
     'Select English': 'اختر الإنجليزية',
     'Select Arabic': 'اختر العربية',
-    noDate: 'لا يوجد بيانات',
+    noData: 'لا يوجد بيانات',
   },
 };

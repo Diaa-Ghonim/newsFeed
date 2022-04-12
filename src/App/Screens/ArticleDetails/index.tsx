@@ -1,9 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
@@ -12,7 +12,8 @@ import {RootStackParamList} from '../../Navigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useSelector} from 'react-redux';
 import {selectNewsState} from '../../../state/selectors';
-import {Line} from '../../Components';
+import {AppText, Line} from '../../Components';
+import {Colors} from '../../../constants/Colors';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetails'>;
 
@@ -21,6 +22,10 @@ export const ArticleDetailsScreen = ({route}: Props) => {
 
   const {articles} = useSelector(selectNewsState);
   const article = articles.find(art => art.id === route?.params?.articleId);
+  const lineColor = isDarkMode ? Colors.lightLine : Colors.darkLine;
+  const metaDataColor = isDarkMode ? Colors.light : Colors.purple;
+  const titleColor = isDarkMode ? Colors.light : Colors.dark;
+  const contentColor = isDarkMode ? Colors.light : Colors.dark;
   return (
     <SafeAreaView
       style={{backgroundColor: isDarkMode ? '#000' : 'transparent'}}>
@@ -39,49 +44,24 @@ export const ArticleDetailsScreen = ({route}: Props) => {
               backgroundColor: isDarkMode ? '#212121' : '#fff',
               borderColor: isDarkMode ? '#000' : '#ddd',
             }}>
-            <Text
-              style={{
-                ...styles.title,
-                color: isDarkMode ? '#fff' : '#111',
-              }}>
+            <AppText.BoldText style={{color: titleColor}}>
               {article?.title}
-            </Text>
-            <Line
-              width="90%"
-              color={isDarkMode ? 'white' : '#c2bebe'}
-              height={1}
-            />
+            </AppText.BoldText>
+            <Line width="90%" color={lineColor} height={1} />
 
-            <Text
-              style={{
-                ...styles.publishedAt,
-                color: isDarkMode ? '#fff' : 'purple',
-              }}>
+            <AppText.RegularText style={{color: metaDataColor}}>
               At: {article?.publishedAt}
-            </Text>
-            <Line
-              width="70%"
-              color={isDarkMode ? 'white' : '#c2bebe'}
-              height={1}
-            />
+            </AppText.RegularText>
+            <Line width="70%" color={lineColor} height={1} />
 
-            <Text
-              style={{
-                ...styles.author,
-                color: isDarkMode ? '#fff' : 'purple',
-              }}>
+            <AppText.RegularText style={{color: metaDataColor}}>
               By: {article?.author}
-            </Text>
-            <Line
-              width="50%"
-              color={isDarkMode ? 'white' : '#c2bebe'}
-              height={1}
-            />
+            </AppText.RegularText>
+            <Line width="50%" color={lineColor} height={1} />
 
-            <Text
-              style={{...styles.content, color: isDarkMode ? '#fff' : '#000'}}>
+            <AppText.RegularText style={{color: contentColor}}>
               {article?.content}
-            </Text>
+            </AppText.RegularText>
             <Image source={{uri: article?.urlToImage}} style={styles.image} />
           </View>
         </View>
@@ -92,7 +72,8 @@ export const ArticleDetailsScreen = ({route}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
     borderWidth: 1,
     borderRadius: 10,
   },

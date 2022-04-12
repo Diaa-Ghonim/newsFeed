@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   regularText: {
     margin: 5,
     fontFamily: 'OpenSans-Regular',
-    fontSize: 15,
+    fontSize: 16,
   },
   boldText: {
     fontFamily: 'OpenSans-Bold',
