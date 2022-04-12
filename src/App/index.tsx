@@ -10,13 +10,14 @@
  */
 
 import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import {StatusBar, Text, useColorScheme} from 'react-native';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store from '../state/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from './Navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {linking} from '../linking';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,7 +25,9 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <NavigationContainer>
+        <NavigationContainer
+          linking={linking}
+          fallback={<Text>Loading...</Text>}>
           <StatusBar
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
             backgroundColor="#6a51ae"
