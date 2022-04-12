@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   Image,
@@ -19,6 +20,7 @@ export const renderItem = ({
   onItemPress = () => {},
   isDarkMode,
 }: Props) => {
+  console.log(item.id);
   return (
     <TouchableWithoutFeedback onPress={() => onItemPress(item)}>
       <View
