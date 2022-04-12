@@ -9,5 +9,6 @@ export const en = {
     Language: 'Language',
     'Select English': 'Select English',
     'Select Arabic': 'Select Arabic',
+    noDate: 'No Data',
   },
 };

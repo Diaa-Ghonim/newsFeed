@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   ActivityIndicator,
@@ -22,7 +21,11 @@ import {Article} from '../../../state/types';
 import {RootStackParamList} from '../../Navigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {CustomInput as SearchInput} from '../../Components';
+import {
+  CustomInput as SearchInput,
+  ErrorMessage,
+  NoData,
+} from '../../Components';
 import {useTranslation} from 'react-i18next';
 
 export const FeedScreen = () => {
@@ -35,9 +38,11 @@ export const FeedScreen = () => {
   const query = useSelector(selectNewsQuery);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   useEffect(() => {
     dispatch(getNews());
   }, [dispatch, query]);
+
   const onItemPress = (item: Article) => {
     navigation.navigate('ArticleDetails', {
       articleId: item.id,
@@ -77,7 +82,9 @@ export const FeedScreen = () => {
       {articles.length === 0 && loading && (
         <ActivityIndicator size="large" color="#0000ff" />
       )}
-      {errMsg !== '' && <Text>{errMsg}</Text>}
+
+      {errMsg !== '' && <ErrorMessage message={errMsg} />}
+
       {isSearchBar && (
         <SearchInput
           inputProps={{
@@ -89,17 +96,8 @@ export const FeedScreen = () => {
         />
       )}
 
-      {articles.length === 0 && !loading && (
-        <View style={styles.noDataContainer}>
-          <Text
-            style={{
-              ...styles.noDataText,
-              color: isDarkMode ? '#fff' : '#000',
-            }}>
-            No Data
-          </Text>
-        </View>
-      )}
+      {articles.length === 0 && !loading && <NoData />}
+
       {articles && articles.length > 0 && (
         <>
           <FlatList
@@ -140,15 +138,4 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   searchIcon: {marginRight: 30},
-  noDataContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noDataText: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'OpenSans-Bold',
-    // color: '#000',
-  },
 });
