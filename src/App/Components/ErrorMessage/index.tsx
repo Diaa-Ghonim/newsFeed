@@ -1,8 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Keyboard,
   StyleSheet,
   Text,
   TextStyle,
+  TouchableWithoutFeedback,
   useColorScheme,
   View,
   ViewStyle,
@@ -23,16 +25,18 @@ export const ErrorMessage = ({
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={[styles.messageContainer, messageContainerStyle]}>
-      <Text
-        style={[
-          styles.message,
-          {color: isDarkMode ? '#fff' : '#000'},
-          messageStyle,
-        ]}>
-        {message}
-      </Text>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={[styles.messageContainer, messageContainerStyle]}>
+        <Text
+          style={[
+            styles.message,
+            {color: isDarkMode ? '#fff' : '#000'},
+            messageStyle,
+          ]}>
+          {message}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
