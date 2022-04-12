@@ -10,7 +10,7 @@
  */
 
 import React from 'react';
-import {StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 // import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store from '../state/store';
@@ -20,8 +20,6 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  console.log(isDarkMode);
-  console.log(styles);
 
   return (
     <SafeAreaProvider>
@@ -37,7 +35,5 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default App;
