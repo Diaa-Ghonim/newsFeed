@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, View, Pressable, useColorScheme} from 'react-native';
+import {StyleSheet, Text, View, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import {useThemeContext} from '../../contexts';
 
 // type Props = {};
 type Language = 'en' | 'ar';
 export const SettingScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const theme = useThemeContext();
   const {t, i18n} = useTranslation();
   const [currentLanguage, setLanguage] = useState(i18n.language);
 
@@ -20,7 +21,7 @@ export const SettingScreen = () => {
     <View
       style={{
         ...styles.wrapper,
-        backgroundColor: isDarkMode ? '#000' : 'transparent',
+        backgroundColor: theme.settingScreenBackgroundColor,
       }}>
       <View style={styles.container}>
         <View style={styles.languageTitle}>
@@ -28,7 +29,7 @@ export const SettingScreen = () => {
             style={{
               ...styles.languageText,
               textAlign: currentLanguage === 'ar' ? 'right' : 'left',
-              color: isDarkMode ? '#fff' : '#000',
+              color: theme.color,
             }}>
             {t('Language')} :
           </Text>

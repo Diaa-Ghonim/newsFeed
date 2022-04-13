@@ -1,65 +1,54 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {RootStackParamList} from '../../Navigation';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useSelector} from 'react-redux';
 import {selectNewsState} from '../../../state/selectors';
 import {AppText, Line} from '../../Components';
-import {Colors} from '../../../constants/Colors';
+import {useThemeContext} from '../../contexts';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetails'>;
 
 export const ArticleDetailsScreen = ({route}: Props) => {
-  const isDarkMode = useColorScheme() === 'dark';
-
+  const theme = useThemeContext();
   const {articles} = useSelector(selectNewsState);
   const article = articles.find(art => art.id === route?.params?.articleId);
-  const lineColor = isDarkMode ? Colors.lightLine : Colors.darkLine;
-  const metaDataColor = isDarkMode ? Colors.light : Colors.purple;
-  const titleColor = isDarkMode ? Colors.light : Colors.dark;
-  const contentColor = isDarkMode ? Colors.light : Colors.dark;
+
   return (
     <SafeAreaView
-      style={{backgroundColor: isDarkMode ? '#000' : 'transparent'}}>
+      style={{backgroundColor: theme.articleDetailsScreenBackgroundColor}}>
       <ScrollView
         style={{
-          backgroundColor: isDarkMode ? '#000' : 'transparent',
+          backgroundColor: theme.articleDetailsScreenBackgroundColor,
         }}>
         <View
-          style={{
-            ...styles.wrapper,
-            backgroundColor: isDarkMode ? '#000' : 'transparent',
-          }}>
+          style={[
+            styles.wrapper,
+            {backgroundColor: theme.articleDetailsScreenBackgroundColor},
+          ]}>
           <View
             style={{
               ...styles.container,
-              backgroundColor: isDarkMode ? '#212121' : '#fff',
-              borderColor: isDarkMode ? '#000' : '#ddd',
+              backgroundColor: theme.articleBackgroundColor,
+              borderColor: theme.articleBorderColor,
             }}>
-            <AppText.BoldText style={{color: titleColor}}>
+            <AppText.BoldText style={{color: theme.color}}>
               {article?.title}
             </AppText.BoldText>
-            <Line width="90%" color={lineColor} height={1} />
+            <Line width="90%" color={theme.lineColor} height={1} />
 
-            <AppText.RegularText style={{color: metaDataColor}}>
+            <AppText.RegularText style={{color: theme.metaDataColor}}>
               At: {article?.publishedAt}
             </AppText.RegularText>
-            <Line width="70%" color={lineColor} height={1} />
+            <Line width="70%" color={theme.lineColor} height={1} />
 
-            <AppText.RegularText style={{color: metaDataColor}}>
+            <AppText.RegularText style={{color: theme.metaDataColor}}>
               By: {article?.author}
             </AppText.RegularText>
-            <Line width="50%" color={lineColor} height={1} />
+            <Line width="50%" color={theme.lineColor} height={1} />
 
-            <AppText.RegularText style={{color: contentColor}}>
+            <AppText.RegularText style={{color: theme.color}}>
               {article?.content}
             </AppText.RegularText>
             <Image source={{uri: article?.urlToImage}} style={styles.image} />
@@ -86,13 +75,11 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   author: {
-    // color: 'purple',
     marginVertical: 5,
     fontSize: 15,
     fontFamily: 'OpenSans-Regular',
   },
   publishedAt: {
-    // color: 'purple',
     marginVertical: 5,
     fontSize: 15,
     fontFamily: 'OpenSans-Regular',
@@ -101,7 +88,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
-    // color: '#000',
   },
   image: {
     width: '100%',
