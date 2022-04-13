@@ -7,7 +7,7 @@ module.exports = {
         moduleName: '@env',
         path: '.env',
         blacklist: null,
-        whitelist: ['NEWS_API'],
+        whitelist: ['NEWS_API', 'API_KEY'],
         safe: false,
         allowUndefined: true,
       },

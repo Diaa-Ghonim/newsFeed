@@ -44,7 +44,6 @@ export const fakeNewsState: NewsState = {
     from: '2022-03-10',
     to: '',
     sortedBy: 'popularity',
-    apiKey: '63ac834c5f2c4c72abe1bf6f4e8dcdf7',
   },
 };
 

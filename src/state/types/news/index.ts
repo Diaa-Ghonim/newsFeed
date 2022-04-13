@@ -30,7 +30,6 @@ export interface NewsQuery {
   from: string;
   to: string;
   sortedBy: string;
-  apiKey: string;
 }
 export interface NewsState {
   loading: boolean;
