@@ -4,14 +4,14 @@ import {
   GetNewsRequestSuccessResponse,
   NewsQuery,
 } from '../../types';
-import {NEWS_API} from '@env';
+import {NEWS_API, API_KEY} from '@env';
 import * as data from '../../../../data/data.json';
 
 export const getNewsAPI = (
   newsQuery: NewsQuery,
 ): Promise<GetNewsRequestSuccessResponse | ApiRequestErrorResponse> => {
-  const {page, pageSize, q, from, to, sortedBy, apiKey} = newsQuery;
-  let urlQuery = `?page=${page}&pageSize=${pageSize}&q=${q}&from=${from}&to${to}&sortBy=${sortedBy}&apiKey=${apiKey}`;
+  const {page, pageSize, q, from, to, sortedBy} = newsQuery;
+  let urlQuery = `?page=${page}&pageSize=${pageSize}&q=${q}&from=${from}&to${to}&sortBy=${sortedBy}&apiKey=${API_KEY}`;
   console.log('NEWS_API', NEWS_API + urlQuery);
   return new Promise((resolve, reject) => {
     /**
