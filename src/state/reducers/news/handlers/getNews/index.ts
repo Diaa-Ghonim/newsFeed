@@ -18,7 +18,13 @@ export const getNewsHandler = {
   ) => {
     draftState.loading = false;
     response.articles = response.articles.map(article => {
-      return {...article, id: uuidv4()};
+      return {
+        ...article,
+        id: uuidv4(),
+        author: article.author || 'Anonymous',
+        publishedAt: article.publishedAt || 'No Puplished Date',
+        content: article.content || 'No Content',
+      };
     });
     if (draftState.query.q) {
       draftState.articles = response.articles;
