@@ -18,6 +18,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from './Navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {linking} from '../linking';
+import {ThemeProvider} from './contexts';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -25,15 +26,17 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <NavigationContainer
-          linking={linking}
-          fallback={<Text>Loading...</Text>}>
-          <StatusBar
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-            backgroundColor="#6a51ae"
-          />
-          <MainNavigator />
-        </NavigationContainer>
+        <ThemeProvider>
+          <NavigationContainer
+            linking={linking}
+            fallback={<Text>Loading...</Text>}>
+            <StatusBar
+              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+              backgroundColor="#6a51ae"
+            />
+            <MainNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
       </Provider>
     </SafeAreaProvider>
   );

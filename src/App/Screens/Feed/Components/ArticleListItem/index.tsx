@@ -3,43 +3,35 @@ import React from 'react';
 import {Image, TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import {Article} from '../../../../../state/types';
 import {AppText, Line} from '../../../../Components';
-import {Colors} from '../../../../../constants/Colors';
 
 interface Props {
   item: Article;
   onItemPress: (item: Article) => void;
-  isDarkMode: boolean;
+  theme: {[key: string]: string};
 }
 
-export const renderItem = ({
-  item,
-  onItemPress = () => {},
-  isDarkMode,
-}: Props) => {
-  const lineColor = isDarkMode ? Colors.lightLine : Colors.darkLine;
-  const metaDataColor = isDarkMode ? Colors.light : Colors.purple;
-  const titleColor = isDarkMode ? Colors.light : Colors.dark;
+export const renderItem = ({item, onItemPress = () => {}, theme}: Props) => {
   return (
     <TouchableWithoutFeedback onPress={() => onItemPress(item)}>
       <View
         style={{
           ...styles.articleContainer,
-          backgroundColor: isDarkMode ? '#212121' : '#fff',
-          borderColor: isDarkMode ? '#000' : '#ddd',
+          backgroundColor: theme.articleBackgroundColor,
+          borderColor: theme.articleBorderColor,
         }}
         key={item.author}>
-        <AppText.BoldText style={{color: titleColor}}>
+        <AppText.BoldText style={{color: theme.color}}>
           {item.title}
         </AppText.BoldText>
-        <Line width="90%" height={1} color={lineColor} />
+        <Line width="90%" height={1} color={theme.lineColor} />
 
-        <AppText.RegularText style={{color: metaDataColor}}>
+        <AppText.RegularText style={{color: theme.metaDataColor}}>
           {item.publishedAt}
         </AppText.RegularText>
 
-        <Line width="75%" height={1} color={lineColor} />
+        <Line width="75%" height={1} color={theme.lineColor} />
 
-        <AppText.RegularText style={{color: metaDataColor}}>
+        <AppText.RegularText style={{color: theme.metaDataColor}}>
           {item.author}
         </AppText.RegularText>
         <Image source={{uri: item.urlToImage}} style={styles.image} />
@@ -54,8 +46,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     borderWidth: 1,
-    // paddingVertical: 20,
-    // paddingHorizontal: 10,
     padding: 15,
     borderRadius: 4,
     marginBottom: 10,

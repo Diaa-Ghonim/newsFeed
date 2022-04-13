@@ -4,7 +4,7 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  useColorScheme,
+  // useColorScheme,
   // RefreshControl,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -27,9 +27,11 @@ import {
   NoData,
 } from '../../Components';
 import {useTranslation} from 'react-i18next';
+import {useThemeContext} from '../../contexts';
 
 export const FeedScreen = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  // const isDarkMode = useColorScheme() === 'dark';
+  const theme = useThemeContext();
   const {t} = useTranslation();
   const [isSearchBar, setIsSearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -55,7 +57,7 @@ export const FeedScreen = () => {
         return (
           <Icon
             name="search"
-            color={isDarkMode ? '#fff' : '#000'}
+            color={theme.color}
             size={15}
             style={styles.searchIcon}
             onPress={() => {
@@ -68,19 +70,19 @@ export const FeedScreen = () => {
         );
       },
     });
-  }, [navigation, isSearchBar, isDarkMode]);
+  }, [navigation, isSearchBar, theme]);
 
   useEffect(() => {
     dispatch(updateNewsQueryQ(searchValue));
   }, [dispatch, searchValue]);
   return (
     <View
-      style={{
-        ...styles.feedContainer,
-        backgroundColor: isDarkMode ? '#000' : 'transparent',
-      }}>
+      style={[
+        styles.feedContainer,
+        {backgroundColor: theme.feedScreenBackgroundColor},
+      ]}>
       {articles.length === 0 && loading && (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color={theme.activityIndicator} />
       )}
 
       {isSearchBar && (
@@ -120,7 +122,7 @@ export const FeedScreen = () => {
             contentContainerStyle={styles.flatList}
             data={articles}
             renderItem={({item}) => {
-              return renderItem({item, onItemPress, isDarkMode});
+              return renderItem({item, onItemPress, theme});
             }}
           />
         </>
