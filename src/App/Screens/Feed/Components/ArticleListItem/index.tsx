@@ -26,13 +26,13 @@ export const renderItem = ({item, onItemPress = () => {}, theme}: Props) => {
         <Line width="90%" height={1} color={theme.lineColor} />
 
         <AppText.RegularText style={{color: theme.metaDataColor}}>
-          {item.publishedAt}
+          At : {item.publishedAt}
         </AppText.RegularText>
 
         <Line width="75%" height={1} color={theme.lineColor} />
 
         <AppText.RegularText style={{color: theme.metaDataColor}}>
-          {item.author}
+          By : {item.author}
         </AppText.RegularText>
         <Image source={{uri: item.urlToImage}} style={styles.image} />
       </View>
