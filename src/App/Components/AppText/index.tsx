@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
   regularText: {
     margin: 5,
     fontFamily: 'OpenSans-Regular',
-    fontSize: 16,
+    fontSize: 18,
   },
   boldText: {
     fontFamily: 'OpenSans-Bold',
     marginBottom: 5,
-    fontSize: 16,
+    fontSize: 18,
   },
 });
